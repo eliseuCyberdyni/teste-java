@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rede Mundial Da Skynet</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="app.js">
+
+        
+</head>
+<body>
+ <style>
+                
+                img    {
+    border-radius: 50%;
+}
+            </style>    
+
+<img src="https://media.tenor.com/J8LIZC2OVOoAAAAi/rob%C3%B4.gif"width="120px" height="120px">
+
+
+<center><img src="C:\Users\EliseuT.I técnico\Downloads\IMG_20230112_082746_374.jpg"width="100px" height="100px"><n><b><p><h3>Criador Da Rede Mundial Da Skynet</h3></p></b></n></center>
+
+<br></br>
+
+
+  
+  <center> <h2>  Publique Seu Dia!🙈🙉🙊</h2> </center>
+    
+    <!-- Criação do textarea -->
+    <center><textarea id="comentario" placeholder="Digite seu comentário aqui..."></textarea></center>
+<br></br>
+    <!-- Botão de envio -->
+    <center><button onclick="enviarComentario()">Enviar</button></center>
+
+    <!-- Exibição do comentário -->
+    <div id="comentarioExibido"></div>
+
+    <script>
+
+        startComments();
+
+        function enviarComentario() {
+            // Captura o valor do textarea
+            const comentario = document.getElementById('comentario').value;
+
+            // persistir comentário no navegador
+            persistInLocalLstorage(comentario);
+
+            // Exibe o comentário na página
+            startComments();
+
+            // Limpa o textarea após o envio
+            document.getElementById('comentario').value = '';
+        }
+
+        function persistInLocalLstorage(comment) {
+            let comments = localStorage.getItem('comments')
+
+            if (!comments) {
+                let objComment = JSON.stringify({comments: Array(comment)})
+                localStorage.setItem('comments', objComment)
+            } else {
+                let objComments = JSON.parse(comments)
+                objComments.comments.push(comment)
+                localStorage.setItem('comments', JSON.stringify(objComments))
+
+            }
+        }
+
+        function getComments() {
+            return localStorage.getItem('comments')
+                ? JSON.parse(localStorage.getItem('comments')).comments
+                : Array();
+        }
+
+        function startComments() {
+            const comentarioExibido = document.getElementById('comentarioExibido')
+            comentarioExibido.innerHTML = '';
+
+            getComments().forEach(function (comentario) {
+                comentarioExibido.innerHTML += `<h3>Seu comentário:</h3><p>${comentario}</p>`;
+            })
+        }
+    </script>
+ 
+</body>
+</html>
